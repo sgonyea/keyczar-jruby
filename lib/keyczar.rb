@@ -14,6 +14,12 @@ module Keyczar
       true
     end
   end
+
+  # @param [String] The full file-system path to a Log4j Properties File
+  # @return [nil] Nil is a good sign
+  def self.set_logger_properties(props_file)
+    org.apache.log4j.PropertyConfigurator.configure(props_file.to_s)
+  end
 end
 
 Keyczar.load_jars!

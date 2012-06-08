@@ -6,7 +6,7 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'keyczar'
+    gem 'keyczar-jruby'
 
 And then execute:
 
@@ -14,11 +14,41 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install keyczar
+    $ gem install keyczar-jruby
 
 ## Usage
 
-TODO: Write usage instructions here
+Simply require "keyczar-jruby" or just "keyczar". You'll want to set the Log4j properties for Keyczar, unless you enjoy warnings.
+
+An example file for development might look like:
+
+```
+log4j.rootLogger=DEBUG, Keyczar
+log4j.appender.Keyczar=org.apache.log4j.RollingFileAppender
+log4j.appender.Keyczar.File=log/keyczar_development.log
+log4j.appender.Keyczar.MaxFileSize=10MB
+log4j.appender.Keyczar.MaxBackupIndex=10
+log4j.appender.Keyczar.layout=org.apache.log4j.PatternLayout
+log4j.appender.Keyczar.layout.ConversionPattern=%d{ISO8601} %p %t %c - %m%n
+```
+
+And one for production:
+
+```
+log4j.rootLogger=ERROR, Keyczar
+log4j.appender.Keyczar=org.apache.log4j.RollingFileAppender
+log4j.appender.Keyczar.File=log/keyczar_production.log
+log4j.appender.Keyczar.MaxFileSize=10MB
+log4j.appender.Keyczar.MaxBackupIndex=10
+log4j.appender.Keyczar.layout=org.apache.log4j.PatternLayout
+log4j.appender.Keyczar.layout.ConversionPattern=%d{ISO8601} %p %t %c - %m%n
+```
+
+Where ever you save this, you'll then want to call:
+
+```ruby
+Keyczar.set_logger_properties("/full/path/to/keyczar_logging_production.properties")
+```
 
 ## Contributing
 
