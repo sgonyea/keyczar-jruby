@@ -3,6 +3,8 @@ require 'pathname'
 require 'keyczar/version'
 
 module Keyczar
+  autoload :Signer, 'keyczar/signer'
+
   def self.root
     @root ||= Pathname(File.dirname File.expand_path(__FILE__))
   end
